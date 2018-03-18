@@ -14,7 +14,7 @@ public class GameOneRuleset implements Ruleset<Coordinate, Action> {
 	private static final int HEIGHT = 6;
 	private static final List<Coordinate> WALL_STATES = Arrays.asList(new Coordinate(1, 1), new Coordinate(2, 1), new Coordinate(3, 1), new Coordinate(1, 5), new Coordinate(4, 4));
 	private static final List<Coordinate> NEGATIVE_STATES = Arrays.asList(new Coordinate(4, 1), new Coordinate(3, 2), new Coordinate(2, 3), new Coordinate(1, 4), new Coordinate(5, 4));
-	private static final List<Coordinate> POSITIVE_STATES = Arrays.asList(new Coordinate(0, 5), new Coordinate(2, 5), new Coordinate(3, 4), new Coordinate(4, 3), new Coordinate(5, 2));
+	private static final List<Coordinate> POSITIVE_STATES = Arrays.asList(new Coordinate(0, 5), new Coordinate(2, 5), new Coordinate(3, 4), new Coordinate(4, 3), new Coordinate(5, 2), new Coordinate(5, 5));
 	
 	@Override
 	public double getMaxReward() {

@@ -88,6 +88,37 @@ public abstract class MdpOptimizer<State, Action> {
 	}
 	
 	/**
+	 * Estimates the utility for the specified state
+	 * @param state
+	 * @return
+	 */
+	protected abstract double estimateUtility(State state);
+	
+	/**
+	 * Re-estimate the utilities of all states until it converges to an error bound 
+	 * defined by the convergence attribute of this optimizer instance
+	 */
+	protected void converge() {
+		Ruleset<State, Action> ruleset = getRuleset();
+		double cvalue = getConvergence() * ruleset.getMaxReward();
+		double error;
+		
+		do {
+			error = 0;
+			
+			Map<State, Double> utilityMap = new HashMap<State, Double>();
+			for(State state: ruleset.getAllPossibleStates()) {
+				double utility = estimateUtility(state);
+				error = Math.max(error, Math.abs(utility - getCurrentUtility(state)));
+				utilityMap.put(state, utility);
+			}
+			
+			for(State state: ruleset.getAllPossibleStates())
+				setCurrentUtility(state, utilityMap.get(state));
+		} while(error > cvalue);
+	}
+	
+	/**
 	 * Evaluates a policy that maximizes the utility value based on current utilities
 	 * @return
 	 */
